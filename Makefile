@@ -1,14 +1,15 @@
+PROJECT_NAME=threadPool
 CC=g++
 CFLAGS=-std=c11 -O3 -g -Wall -pthread -I.
 DEPS = function_pool.h
-OBJ = main.o function_pool.o 
+OBJ = main.o executor.o function_pool.o 
 
 %.o: %.c $(DEPS)
 	$(CC) -c -o $@ $< $(CFLAGS)
 
-threadPool: $(OBJ)
+$(PROJECT_NAME): $(OBJ)
 	$(CC) -o $@ $^ $(CFLAGS)
 
 clean:
 	rm -rf *.o
-	rm threadPool
+	rm $(PROJECT_NAME)
