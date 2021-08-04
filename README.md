@@ -15,6 +15,6 @@ Think through which methods are required and useful in such interface, design an
  
 - Executor have method **push_func** to add std::function<void()> to queue for futher execution.
 
-- Executor can synchronize threads between bunch of pushed tasks by **synchronize** method.
+- Executor can synchronize threads between bunches of pushed tasks by **synchronize** method.
 
 - Executor must be **finalized** after all manually or by default via destructor.
