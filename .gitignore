@@ -33,3 +33,7 @@
 
 # Binary Building
 threadPool
+# Visual Studio trash
+x64
+x86
+.vs
