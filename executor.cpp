@@ -15,9 +15,9 @@ Executor::Executor()
   init();
 };
 
-Executor::Executor(int64_t N)
+Executor::Executor(const int64_t N)
 { 
-  num_threads=N;
+  num_threads = N;
   init();
 };
 
@@ -27,12 +27,18 @@ void Executor::push_func(std::function<void()> func)
   func_pool.push(func);
 }
 
+void Executor::synchronize() 
+{
+    func_pool.sync();
+    std::cout << "Synchronization\n";
+}
+
 void Executor::finalize()
 {
   func_pool.done();
   for (unsigned int i = 0; i < thread_pool.size(); i++)
   {
-    thread_pool.at(i).join();
+      thread_pool.at(i).join();
   }
   isFinalized = true;
   std::cout << "number of executed functions = " << num_functions << std::endl;
@@ -54,4 +60,5 @@ Executor::~Executor()
    { 
       finalize();
    }
+   thread_pool.clear();
 }

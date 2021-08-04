@@ -49,3 +49,8 @@ void Function_pool::infinite_loop_func()
     }
 }
 
+void Function_pool::sync() 
+{
+  std::unique_lock<std::mutex> lock(m_lock);
+  m_data_condition.wait(lock, [this]{return !m_function_queue.empty();});
+}

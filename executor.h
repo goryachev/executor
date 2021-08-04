@@ -18,8 +18,9 @@ private:
     bool isFinalized=false;
 public:
     Executor();
-    Executor(int64_t N);
+    Executor(const int64_t N);
     void push_func(std::function<void()> func);
+    void synchronize();
     void finalize();
     int64_t get_num_threads();
     int64_t get_num_threads() const;

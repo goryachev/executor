@@ -6,6 +6,10 @@
 #include <atomic>
 #include <cassert>
 
+/**
+*  Chapter 3 "C++ Concurrency in Action", A. Williams
+*/
+
 class Function_pool
 {
 
@@ -22,4 +26,5 @@ public:
     void push(std::function<void()> func);
     void done();
     void infinite_loop_func();
+    void sync();
 };
