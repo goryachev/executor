@@ -1,6 +1,9 @@
 #**functionPool**
+
 **Gear Tech issue**
+
 ##**ISSUE**
+
 Design and implement simple task executor (aka thread pool).
 
 Task is a simple std::function<void()>. Interface should accept such tasks and execute them on a number of threads N. 
