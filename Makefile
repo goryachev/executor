@@ -1,4 +1,4 @@
-PROJECT_NAME=threadPool
+PROJECT_NAME=executor
 CC=g++
 CFLAGS=-std=c11 -O3 -g -Wall -pthread -I.
 DEPS = function_pool.h executor.h
