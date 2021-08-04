@@ -15,4 +15,4 @@ Think through which methods are required and useful in such interface, design an
  
 - Executor have method **push_func** to add std::function<void()> to queue for futher execution.
 
-- After filling function queue launch method **run** for parallel tasks execution.
+- Executor can synchronize threads by **finalize** method.
