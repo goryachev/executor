@@ -15,12 +15,13 @@ private:
     int64_t num_functions=0; 
     std::vector<std::thread> thread_pool;
     void init();
-
+    bool isFinalized=false;
 public:
     Executor();
     Executor(int64_t N);
     void push_func(std::function<void()> func);
-    void run();
+    void finalize();
     int64_t get_num_threads();
     int64_t get_num_threads() const;
+    ~Executor();
 };

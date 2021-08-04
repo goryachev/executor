@@ -27,13 +27,14 @@ void Executor::push_func(std::function<void()> func)
   func_pool.push(func);
 }
 
-void Executor::run()
+void Executor::finalize()
 {
   func_pool.done();
   for (unsigned int i = 0; i < thread_pool.size(); i++)
   {
     thread_pool.at(i).join();
   }
+  isFinalized = true;
   std::cout << "number of executed functions = " << num_functions << std::endl;
 };
 
@@ -45,4 +46,12 @@ int64_t Executor::get_num_threads()
 int64_t Executor::get_num_threads() const
 {
    return thread_pool.size();
+}
+
+Executor::~Executor()
+{
+   if(!isFinalized)
+   { 
+      finalize();
+   }
 }

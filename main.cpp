@@ -24,7 +24,7 @@ void unit_test_1()
        executor.push_func(example_function);
     }
 
-    executor.run();
+    executor.finalize();
     std::cout << "done" << std::endl;
 }
 
@@ -40,8 +40,33 @@ void unit_test_2()
     {
        executor.push_func(example_function);
     }
+    for (int i = 0; i < num_functions; i++)
+    {
+       executor.push_func(example_function);
+    }
 
-    executor.run();
+    executor.finalize();
+    std::cout << "done" << std::endl;
+}
+
+void unit_test_3()
+{
+    std::cout << "starting operation" << std::endl;
+    const int64_t N = 6;
+    Executor executor(6);
+    const int64_t num_functions = 12;
+
+    //here we should send our functions
+    for (int i = 0; i < num_functions; i++)
+    {
+       executor.push_func(example_function);
+    }
+    executor.finalize();
+    for (int i = 0; i < num_functions; i++)
+    {
+       executor.push_func(example_function);
+    }
+
     std::cout << "done" << std::endl;
 }
 
@@ -51,5 +76,7 @@ int main()
   unit_test_1();
   std::cout << std::endl;
   unit_test_2();
+  std::cout << std::endl;
+  unit_test_3();
   return 0;
 }
