@@ -99,12 +99,10 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="executor.cpp" />
-    <ClCompile Include="function_pool.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="executor.h" />
-    <ClInclude Include="function_pool.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

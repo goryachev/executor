@@ -18,18 +18,12 @@
     <ClCompile Include="executor.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="function_pool.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="executor.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="function_pool.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
