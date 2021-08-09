@@ -1,7 +1,7 @@
 PROJECT_NAME=executor
 CC=g++
 CFLAGS=-std=c11 -O3 -g -Wall -pthread -I.
-DEPS = function_pool.h executor.h
+DEPS = executor.h
 OBJ = main.o executor.o 
 
 %.o: %.c $(DEPS)
