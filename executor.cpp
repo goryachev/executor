@@ -25,9 +25,10 @@ Executor::Executor(const int64_t N) : m_function_queue(), m_lock(), m_data_condi
 
 void Executor::push_func(std::function<void()> func)
 {
-    num_functions++; 
+    
     std::unique_lock<std::mutex> lock(m_lock);
     m_function_queue.push(func);
+    num_functions++;
     // when we send the notification immediately, the consumer will try to get the lock , so unlock asap
     lock.unlock();
     m_data_condition.notify_one();
@@ -67,27 +68,19 @@ void Executor::infinite_loop_func()
 
 void Executor::synchronize() 
 {
-    for (const auto& future : futures) future.wait();
+    
     std::cout << "Synchronization\n";
 }
 
 void Executor::finalize()
 {
     done();
-    for (unsigned int i = 0; i < thread_pool.size(); i++)
-    {
-      thread_pool.at(i).join();
-    }
+    join_all();
     isFinalized = true;
     std::cout << "number of executed functions = " << num_functions << std::endl;
 };
 
 int64_t Executor::get_num_threads()
-{
-    return thread_pool.size();
-}
-
-int64_t Executor::get_num_threads() const
 {
     return thread_pool.size();
 }
@@ -99,4 +92,15 @@ Executor::~Executor()
         finalize();
     }
     thread_pool.clear();
+}
+
+void Executor::join_all()
+{
+    for (auto& thread : thread_pool)
+    {
+        if (thread.joinable())
+        {
+            thread.join();
+        }
+    }
 }

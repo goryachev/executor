@@ -11,10 +11,12 @@
 #include <atomic>
 #include <cassert>
 
-
 /**
 *  Chapter 3 "C++ Concurrency in Action", A. Williams
 */
+/**
+ * Based Idea Source from https://stackoverflow.com/questions/15752659/thread-pooling-in-c11
+ */
 
 class Executor
 {
@@ -29,19 +31,22 @@ private:
     std::atomic<bool> m_accept_functions;
  
     int64_t num_threads=0;
-    int64_t num_functions=0; 
+    std::atomic<int64_t> num_functions=0;
 
     void init();
     bool isFinalized=false;
 public:
     Executor();
     Executor(const int64_t N);
+    // delete all copy posibilities to avoid the increasing life time of joinable thread 
+    Executor(Executor const&) = delete;
+    Executor& operator=(Executor const&) = delete;
     void done();
     void infinite_loop_func();
     void push_func(std::function<void()> func);
     void synchronize();
     void finalize();
+    void join_all();
     int64_t get_num_threads();
-    int64_t get_num_threads() const;
     ~Executor();
 };
