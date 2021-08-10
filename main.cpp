@@ -101,6 +101,7 @@ int main()
   unit_test_3();
 #ifdef _WIN64
 // Windows systems only for console info keeping on screen 
+  std::cout << "\n(PRESS ENTER)\n";
   getchar();
 #endif
   return 0;

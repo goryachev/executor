@@ -12,10 +12,10 @@
 #include <cassert>
 
 /**
-*  Chapter 3 "C++ Concurrency in Action", A. Williams
-*/
-/**
- * Based Idea Source from https://stackoverflow.com/questions/15752659/thread-pooling-in-c11
+ *   Suitable Sources:
+ *   --- A. Williams, "C++ Concurrency in Action"
+ *   --- https://stackoverflow.com/questions/15752659/thread-pooling-in-c11 (based idea)
+ *   --- https://github.com/amc176/cpp-threadpool
  */
 
 class Executor
@@ -30,23 +30,31 @@ private:
     std::condition_variable m_data_condition;
     std::atomic<bool> m_accept_functions;
  
-    int64_t num_threads=0;
-    std::atomic<int64_t> num_functions=0;
+    uint64_t m_num_threads=0;
+    std::atomic<uint64_t> m_total_functions = 0;
+    std::atomic<uint64_t> m_current_num_functions = 0;
 
     void init();
     bool isFinalized=false;
-public:
+
+    void infinite_loop_func();
+    void join_all();
+    void done();
+
+
+ public:
     Executor();
     Executor(const int64_t N);
     // delete all copy posibilities to avoid the increasing life time of joinable thread 
     Executor(Executor const&) = delete;
     Executor& operator=(Executor const&) = delete;
-    void done();
-    void infinite_loop_func();
+   
     void push_func(std::function<void()> func);
     void synchronize();
     void finalize();
-    void join_all();
-    int64_t get_num_threads();
+    uint64_t get_total_num_functions();
+    uint64_t get_current_num_functions();
+    uint64_t get_num_threads();
+    uint64_t get_num_threads() const;
     ~Executor();
 };
