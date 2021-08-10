@@ -121,7 +121,7 @@ uint64_t Executor::get_num_threads() const
 }
 
 /**
- * @brief Returns the total number of function tasks that already have been executed
+ * @brief Returns the total number of function tasks that already have been executed and must be executed
  */
 uint64_t Executor::get_total_num_functions() 
 {

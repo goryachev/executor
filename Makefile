@@ -13,3 +13,5 @@ $(PROJECT_NAME): $(OBJ)
 clean:
 	rm -rf *.o
 	rm $(PROJECT_NAME)
+run:
+	./$(PROJECT_NAME)
