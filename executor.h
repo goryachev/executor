@@ -31,8 +31,8 @@ private:
     std::atomic<bool> m_accept_functions;
  
     uint64_t m_num_threads=0;
-    std::atomic<uint64_t> m_total_functions = 0;
-    std::atomic<uint64_t> m_current_num_functions = 0;
+    std::atomic<uint64_t> m_total_functions{0};
+    std::atomic<uint64_t> m_current_num_functions{0};
 
     void init();
     bool isFinalized=false;
