@@ -2,16 +2,16 @@
 #include "executor.h"
 
 
-class quit_worker_exception : public std::exception {};
+//class quit_worker_exception : public std::exception {};
 
 void example_function()
 {
-    std::cout << "GearTech4ever!\n";
+    std::cout << ("GearTech4ever!\tthreadID: " + std::to_string(std::hash<std::thread::id>{}(std::this_thread::get_id())) + "\n");
 }
 
 void example_function_inversely()
 {
-    std::cout << "!reve4hceTraeG\n";
+    std::cout << ("!reve4hceTraeG\tthreadID: " + std::to_string(std::hash<std::thread::id>{}(std::this_thread::get_id())) + "\n");
 }
 
 /**
